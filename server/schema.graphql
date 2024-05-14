@@ -1,0 +1,29 @@
+type Query {
+    products:[Product]
+    product(id:ID!):Product
+    store(id:ID!):Store
+}
+
+type Mutation {
+    createProduct(input:CreateProductInput!):Product
+}
+
+input CreateProductInput{
+    title:String!
+    description:String
+}
+
+type Store{
+    id:ID!,
+    name:String,
+    description:String,
+}
+
+type Product{
+    id:ID!
+    store:Store,  
+    title:String,
+    description:String,
+    date:String,
+}
+
