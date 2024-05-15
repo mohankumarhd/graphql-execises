@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import ProductList from "../components/ProductList";
 import { getProducts } from "../lib/graphql/quiries";
 
-getProducts().then((products) => console.log(products));
-
 function HomePage() {
   const [products, setProducts] = useState(null);
 

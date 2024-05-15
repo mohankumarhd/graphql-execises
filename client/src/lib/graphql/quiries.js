@@ -1,16 +1,28 @@
-import { GraphQLClient, gql } from "graphql-request";
 import { getAccessToken } from "../auth";
+import {
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+  gql,
+  concat,
+  ApolloLink,
+} from "@apollo/client";
 
-const client = new GraphQLClient("http://localhost:9000/graphql", {
-  headers: () => {
-    const accessToken = getAccessToken();
-    console.log("[AccessToken]", accessToken);
-    if (accessToken) {
-      return { Authorization: `Bearer ${accessToken}` };
-    }
+const httpLink = createHttpLink({ uri: "http://localhost:9000/graphql" });
 
-    return {};
-  },
+const authLink = new ApolloLink((operation, forward) => {
+  const accessToken = getAccessToken();
+  if (accessToken) {
+    operation.setContext({
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+  }
+  return forward(operation);
+});
+
+const apolloClient = new ApolloClient({
+  link: concat(authLink, httpLink),
+  cache: new InMemoryCache(),
 });
 
 export async function createProduct(title, description) {
@@ -21,14 +33,15 @@ export async function createProduct(title, description) {
       }
     }
   `;
-  const { job } = await client.request(mutation, {
-    input: {
-      title,
-      description,
+
+  const result = await apolloClient.mutate({
+    mutation,
+    variables: {
+      input: { title, description },
     },
   });
 
-  return job;
+  return result.data.job;
 }
 
 export async function getStore(id) {
@@ -41,8 +54,12 @@ export async function getStore(id) {
       }
     }
   `;
-  const { store } = await client.request(query, { id });
-  return store;
+
+  const result = await apolloClient.query({
+    query,
+    variables: { id },
+  });
+  return result.data.store;
 }
 
 export async function getProduct(id) {
@@ -61,8 +78,12 @@ export async function getProduct(id) {
       }
     }
   `;
-  const { product } = await client.request(query, { id });
-  return product;
+
+  const result = await apolloClient.query({
+    query,
+    variables: { id },
+  });
+  return result.data.product;
 }
 
 export async function getProducts() {
@@ -80,7 +101,7 @@ export async function getProducts() {
     }
   `;
 
-  const { products } = await client.request(query);
+  const result = await apolloClient.query({ query });
 
-  return products;
+  return result.data.products;
 }
