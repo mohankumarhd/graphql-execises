@@ -1,8 +1,11 @@
 export const resolversExample = {
   Query: {
     employees: () => employees,
+    cars: () => carsData,
   },
 };
+
+const carsData = [{ color: "RED" }, { color: "GREEN" }, { color: "BLUE" }];
 
 const employees = [
   {
