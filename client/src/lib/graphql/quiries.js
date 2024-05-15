@@ -25,8 +25,10 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
+const link = ApolloLink.from([linkChain, authLink, httpLink]);
+
 const apolloClient = new ApolloClient({
-  link: concat(linkChain, httpLink),
+  link: link,
   cache: new InMemoryCache(),
 });
 
