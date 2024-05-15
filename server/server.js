@@ -28,7 +28,6 @@ const typeDefsExample = await readFile(
 );
 
 async function getContext({ req }) {
-  console.log("[getContext]", req.auth.sub);
   if (req.auth) {
     const user = await getUser(req.auth.sub);
     return { user };

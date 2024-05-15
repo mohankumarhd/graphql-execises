@@ -1,22 +1,24 @@
- # Queries can fetch a list of libraries
-  type Query {
-    libraries: [Library]
-  }
+interface Employee {
+  name: String
+  age: Int
+  salary: Float
+}
 
-# A library has a branch and books
-  type Library {
-    branch: String!
-    books: [Book!]
-  }
+type CurrentEmployee implements Employee {
+  name: String
+  age: Int
+  salary: Float
+}
 
- # A book has a title and author
-  type Book {
-    title: String!
-    author: Author!
-  }
+type FormerEmployee implements Employee {
+  name: String
+  age: Int
+  salary: Float
+  terminationDate: String
+}
 
- # An author has a name
-  type Author {
-    name: String!
-  }
+union EmployeeDetails = CurrentEmployee | FormerEmployee
 
+type Query {
+  employees: [EmployeeDetails]
+}
