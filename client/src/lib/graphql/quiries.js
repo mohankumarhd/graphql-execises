@@ -8,6 +8,11 @@ import {
   ApolloLink,
 } from "@apollo/client";
 
+import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
+import { sha256 } from "crypto-hash";
+
+const linkChain = createPersistedQueryLink({ sha256 });
+
 const httpLink = createHttpLink({ uri: "http://localhost:9000/graphql" });
 
 const authLink = new ApolloLink((operation, forward) => {
@@ -21,7 +26,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 const apolloClient = new ApolloClient({
-  link: concat(authLink, httpLink),
+  link: concat(linkChain, httpLink),
   cache: new InMemoryCache(),
 });
 
