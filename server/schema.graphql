@@ -2,6 +2,7 @@ type Query {
     products:[Product]
     product(id:ID!):Product
     store(id:ID!):Store
+   
 }
 
 type Mutation {
@@ -25,5 +26,10 @@ type Product{
     title:String,
     description:String,
     date:String,
+   
 }
+
+
+
+
 

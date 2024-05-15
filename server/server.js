@@ -5,7 +5,9 @@ import { authMiddleware, handleLogin } from "./auth.js";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { readFile } from "node:fs/promises";
-import { resolvers } from "./resolvers.js";
+import { resolversProductInfo } from "./resolvers-product-info.js";
+import { resolversExample } from "./resolvers-example.js";
+import { makeExecutableSchema } from "graphql-tools";
 
 const PORT = 9000;
 
@@ -14,8 +16,13 @@ app.use(cors(), express.json(), authMiddleware);
 
 app.post("/login", handleLogin);
 
-const typeDefs = await readFile(
+const typeDefsProductInfo = await readFile(
   "/home/mohanhd/work/graphql/assignment/product-info/server/schema.graphql",
+  "utf-8"
+);
+
+const typeDefsExample = await readFile(
+  "/home/mohanhd/work/graphql/assignment/product-info/server/schema-example.graphql",
   "utf-8"
 );
 
@@ -23,7 +30,13 @@ function getContext({ req }) {
   return { auth: req.auth };
 }
 
-const apolloserver = new ApolloServer({ typeDefs, resolvers });
+const apolloserver = new ApolloServer({
+  schema: makeExecutableSchema({
+    typeDefs: [typeDefsExample, typeDefsProductInfo],
+    resolvers: [resolversExample, resolversProductInfo],
+  }),
+});
+
 await apolloserver.start();
 app.use("/graphql", expressMiddleware(apolloserver, { context: getContext }));
 
