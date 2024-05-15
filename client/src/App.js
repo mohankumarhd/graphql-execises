@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { getUser } from "./lib/auth";
 import NavBar from "./components/NavBar";
 import StorePage from "./pages/StorePage";
-import CreateJobPage from "./pages/CreateJobPage";
+import CreateProductPage from "./pages/CreateProductPage";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import LoginPage from "./pages/LoginPage";
@@ -30,7 +30,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<HomePage />} />
           <Route path="/stores/:storeId" element={<StorePage />} />
-          <Route path="/jobs/new" element={<CreateJobPage />} />
+          <Route path="/products/new" element={<CreateProductPage />} />
           <Route path="/products/:productId" element={<ProductPage />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         </Routes>

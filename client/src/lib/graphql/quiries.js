@@ -1,6 +1,35 @@
 import { GraphQLClient, gql } from "graphql-request";
+import { getAccessToken } from "../auth";
 
-const client = new GraphQLClient("http://localhost:9000/graphql");
+const client = new GraphQLClient("http://localhost:9000/graphql", {
+  headers: () => {
+    const accessToken = getAccessToken();
+    console.log("[AccessToken]", accessToken);
+    if (accessToken) {
+      return { Authorization: `Bearer ${accessToken}` };
+    }
+
+    return {};
+  },
+});
+
+export async function createProduct(title, description) {
+  const mutation = gql`
+    mutation CreateProduct($input: CreateProductInput!) {
+      job: createProduct(input: $input) {
+        id
+      }
+    }
+  `;
+  const { job } = await client.request(mutation, {
+    input: {
+      title,
+      description,
+    },
+  });
+
+  return job;
+}
 
 export async function getStore(id) {
   const query = gql`
@@ -12,9 +41,7 @@ export async function getStore(id) {
       }
     }
   `;
-
   const { store } = await client.request(query, { id });
-
   return store;
 }
 

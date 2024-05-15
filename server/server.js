@@ -8,6 +8,7 @@ import { readFile } from "node:fs/promises";
 import { resolversProductInfo } from "./resolvers-product-info.js";
 import { resolversExample } from "./resolvers-example.js";
 import { makeExecutableSchema } from "graphql-tools";
+import { getUser } from "./db/users.js";
 
 const PORT = 9000;
 
@@ -26,8 +27,12 @@ const typeDefsExample = await readFile(
   "utf-8"
 );
 
-function getContext({ req }) {
-  return { auth: req.auth };
+async function getContext({ req }) {
+  console.log("[getContext]", req.auth.sub);
+  if (req.auth) {
+    const user = await getUser(req.auth.sub);
+    return { user };
+  }
 }
 
 const apolloserver = new ApolloServer({

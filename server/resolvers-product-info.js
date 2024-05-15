@@ -15,11 +15,14 @@ export const resolversProductInfo = {
   },
 
   Mutation: {
-    createProduct: (_root, { input: { title, description } }, { auth }) => {
-      if (!auth) {
-        throw unauthorizedError("Missing authentication");
+    createProduct: (_root, { input: { title, description } }, { user }) => {
+      if (!user) {
+        unauthorizedError("Unauthorised access");
       }
-      const storeId = "FjcJCHJALA4i";
+
+      console.log(user);
+      const storeId = user.storeId;
+
       return createProduct({ storeId, title, description });
     },
   },
