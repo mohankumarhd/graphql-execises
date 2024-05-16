@@ -4,7 +4,6 @@ import {
   InMemoryCache,
   createHttpLink,
   gql,
-  concat,
   ApolloLink,
 } from "@apollo/client";
 
@@ -111,4 +110,20 @@ export async function getProducts() {
   const result = await apolloClient.query({ query });
 
   return result.data.products;
+}
+
+export async function getCustomers() {
+  const query = gql`
+    query Employees {
+      customers {
+        customerId
+        email
+        name
+      }
+    }
+  `;
+
+  const result = await apolloClient.query({ query });
+
+  return result.data.customers;
 }
