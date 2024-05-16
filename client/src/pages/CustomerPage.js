@@ -20,6 +20,8 @@ function CustomerPage() {
         <div className="block">{customer && customer.customerId}</div>
         <div className="block">{customer && customer.name}</div>
         <div className="block">{customer && customer.email}</div>
+        <div className="block">{customer && customer.phoneNumber}</div>
+        <div className="block">{customer && customer.policyId}</div>
       </div>
     </div>
   );

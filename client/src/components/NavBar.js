@@ -14,12 +14,12 @@ function NavBar({ user, onLogout }) {
         <Link className="navbar-item" to="/">
           Home
         </Link>
-        <Link className="navbar-item" to="/customers">
-          Customers
-        </Link>
       </div>
       {loggedIn ? (
         <div className="navbar-end">
+          <Link className="navbar-item" to="/customers">
+            Customers
+          </Link>
           <span className="navbar-item has-text-grey">{user.email}</span>
           <Link className="navbar-item" to="/products/new">
             Post New Product
