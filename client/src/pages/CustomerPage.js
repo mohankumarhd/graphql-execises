@@ -32,29 +32,39 @@ function CustomerPage() {
   }
   return (
     <div>
-      <h1 className="title is-2">Customer Details</h1>
-      <div className="columns">
-        <div className="column">
-          <div>{customer.customerId && "Id : " + customer.customerId}</div>
-          <div>{customer.name && "Name : " + customer.name}</div>
-          <div>{customer.email && "Email : " + customer.email}</div>
-          <div>
-            {customer.phoneNumber && "Phone Number : " + customer.phoneNumber}
-          </div>
+      <h4 className="title is-4 align-center">Customer Details</h4>
+      <div class="columns is-mobile is-multiline ">
+        <div class="column is-narrow">
+          <p class="bd-notification is-primary">
+            <br />
+            <p>{customer.customerId && "Id : " + customer.customerId}</p>
+            <p>{customer.name && "Name : " + customer.name}</p>
+            <p></p>
+            {customer.email && "Email : " + customer.email}
+            <p>
+              {customer.phoneNumber && "Phone Number : " + customer.phoneNumber}
+            </p>
+          </p>
+        </div>
+        <div class="column is-narrow">
+          <p class="bd-notification is-primary">
+            <br />
 
-          <div>{customer.policy.id && "Policy Id : " + customer.policy.id}</div>
-          <div>{customer.policy.name && "Name : " + customer.policy.name}</div>
-          <div>
-            {customer.policy.startDate &&
-              "Start Date : " + customer.policy.startDate}
-          </div>
-          <div>
-            {customer.policy.endDate && "End Date : " + customer.policy.endDate}
-          </div>
-          <div>
-            {customer.policy.renewalDate &&
-              "Renewal Date : " + customer.policy.renewalDate}
-          </div>
+            <p>{customer.policy.id && "Policy Id : " + customer.policy.id}</p>
+            <p>{customer.policy.name && "Name : " + customer.policy.name}</p>
+            <p>
+              {customer.policy.startDate &&
+                "Start Date : " + customer.policy.startDate}
+            </p>
+            <p>
+              {customer.policy.endDate &&
+                "End Date : " + customer.policy.endDate}
+            </p>
+            <p>
+              {customer.policy.renewalDate &&
+                "Renewal Date : " + customer.policy.renewalDate}
+            </p>
+          </p>
         </div>
       </div>
     </div>

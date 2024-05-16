@@ -11,7 +11,7 @@ function CustomerList() {
   return (
     <>
       <div>
-        <h1 className="title">Customers</h1>
+        <h1 className="title is-4">Customers</h1>
         <table className="table">
           <thead>
             <tr>
