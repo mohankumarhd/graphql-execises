@@ -5,6 +5,7 @@ const { schema } = connection;
 await schema.dropTableIfExists("user");
 await schema.dropTableIfExists("product");
 await schema.dropTableIfExists("store");
+await schema.dropTableIfExists("customer");
 
 await schema.createTable("store", (table) => {
   table.text("id").notNullable().primary();
@@ -25,6 +26,14 @@ await schema.createTable("user", (table) => {
   table.text("storeId").notNullable().references("id").inTable("store");
   table.text("email").notNullable().unique();
   table.text("password").notNullable();
+});
+
+await schema.createTable("customer", (table) => {
+  table.text("customerId").notNullable().primary();
+  table.text("name").notNullable();
+  table.text("email").notNullable();
+  table.text("phoneNumber");
+  table.text("policyId").notNullable();
 });
 
 await connection.table("store").insert([
@@ -80,6 +89,23 @@ await connection.table("user").insert([
     storeId: "Gu7QW9LcnF5d",
     email: "employee.2@test.com",
     password: "test123",
+  },
+]);
+
+await connection.table("customer").insert([
+  {
+    customerId: "CcMJpL7b4131",
+    name: "John",
+    email: "john@test.com",
+    phoneNumber: "8260229050",
+    policyId: "123456789",
+  },
+  {
+    customerId: "CcMJpL7b4132",
+    name: "Ram",
+    email: "ram@test.com",
+    phoneNumber: "7895454231",
+    policyId: "123456789",
   },
 ]);
 

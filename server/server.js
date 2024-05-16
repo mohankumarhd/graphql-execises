@@ -9,6 +9,8 @@ import { resolversProductInfo } from "./resolvers-product-info.js";
 import { resolversExample } from "./resolvers-example.js";
 import { makeExecutableSchema } from "graphql-tools";
 import { getUser } from "./db/users.js";
+import { read } from "node:fs";
+import { resolversCustomer } from "./resolvers-customer.js";
 
 const PORT = 9000;
 
@@ -27,6 +29,11 @@ const typeDefsExample = await readFile(
   "utf-8"
 );
 
+const typeDefsCustomer = await readFile(
+  "/home/mohanhd/work/graphql/assignment/product-info/server/schema-customer.graphql",
+  "utf-8"
+);
+
 async function getContext({ req }) {
   if (req.auth) {
     const user = await getUser(req.auth.sub);
@@ -36,8 +43,8 @@ async function getContext({ req }) {
 
 const apolloserver = new ApolloServer({
   schema: makeExecutableSchema({
-    typeDefs: [typeDefsExample, typeDefsProductInfo],
-    resolvers: [resolversExample, resolversProductInfo],
+    typeDefs: [typeDefsExample, typeDefsProductInfo, typeDefsCustomer],
+    resolvers: [resolversExample, resolversProductInfo, resolversCustomer],
   }),
 });
 

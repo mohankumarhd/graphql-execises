@@ -8,6 +8,7 @@ import CreateProductPage from "./pages/CreateProductPage";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import LoginPage from "./pages/LoginPage";
+import CustomerList from "./pages/CustomerList";
 
 function App() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function App() {
       <main className="section">
         <Routes>
           <Route index path="/" element={<HomePage />} />
+          <Route path="/customers" element={<CustomerList />} />
           <Route path="/stores/:storeId" element={<StorePage />} />
           <Route path="/products/new" element={<CreateProductPage />} />
           <Route path="/products/:productId" element={<ProductPage />} />
