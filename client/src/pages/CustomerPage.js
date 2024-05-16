@@ -50,18 +50,14 @@ function CustomerPage() {
           <p class="bd-notification is-primary">
             <br />
 
-            <p>{customer.policy.id && "Policy Id : " + customer.policy.id}</p>
-            <p>{customer.policy.name && "Name : " + customer.policy.name}</p>
+            <p>{customer.policy && "Policy Id : " + customer.policy.id}</p>
+            <p>{customer.policy && "Name : " + customer.policy.name}</p>
             <p>
-              {customer.policy.startDate &&
-                "Start Date : " + customer.policy.startDate}
+              {customer.policy && "Start Date : " + customer.policy.startDate}
             </p>
+            <p>{customer.policy && "End Date : " + customer.policy.endDate}</p>
             <p>
-              {customer.policy.endDate &&
-                "End Date : " + customer.policy.endDate}
-            </p>
-            <p>
-              {customer.policy.renewalDate &&
+              {customer.policy &&
                 "Renewal Date : " + customer.policy.renewalDate}
             </p>
           </p>
