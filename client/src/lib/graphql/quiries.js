@@ -127,3 +127,19 @@ export async function getCustomers() {
 
   return result.data.customers;
 }
+
+export async function getCustomer(customerId) {
+  const query = gql`
+    query Customer($customerId: ID!) {
+      customer(id: $customerId) {
+        customerId
+        email
+        name
+      }
+    }
+  `;
+
+  const result = await apolloClient.query({ query, variables: { customerId } });
+
+  return result.data.customer;
+}

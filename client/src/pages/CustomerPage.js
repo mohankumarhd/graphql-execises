@@ -1,38 +1,28 @@
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import { formatDate } from "../lib/formatters";
+import { getCustomer } from "../lib/graphql/quiries";
 import { useEffect, useState } from "react";
-import { getProduct } from "../lib/graphql/quiries";
-
-function ProductPage() {
-  const { productId } = useParams();
-
-  const [product, setProduct] = useState(null);
-
-  getProduct(productId).then((product) => console.log(product));
+function CustomerPage() {
+  const { customerId } = useParams(null);
+  getCustomer(customerId).then((res) => console.log(res));
+  const [customer, setCustomer] = useState(null);
 
   useEffect(() => {
-    getProduct(productId).then((product) => setProduct(product));
-  }, [productId]);
+    getCustomer(customerId).then((customer) => setCustomer(customer));
+  }, [customerId]);
 
-  if (!product) {
-    return <div>Loading....</div>;
+  if (!customer) {
+    <div>Loading....</div>;
   }
-
   return (
     <div>
-      <h1 className="title is-2">{product.title}</h1>
-      <h2 className="subtitle is-4">
-        <Link to={`/stores/${product.store.id}`}>{product.store.name}</Link>
-      </h2>
+      <h1 className="title is-2">Customer Details</h1>
       <div className="box">
-        <div className="block has-text-grey">
-          Posted: {formatDate(product.date, "long")}
-        </div>
-        <p className="block">{product.description}</p>
+        <div className="block">{customer && customer.customerId}</div>
+        <div className="block">{customer && customer.name}</div>
+        <div className="block">{customer && customer.email}</div>
       </div>
     </div>
   );
 }
 
-export default ProductPage;
+export default CustomerPage;

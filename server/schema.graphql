@@ -1,35 +1,35 @@
 type Query {
-    products:[Product]
-    product(id:ID!):Product
-    store(id:ID!):Store
-   
+  products: [Product]
+  product(id: ID!): Product
+  store(id: ID!): Store
 }
 
 type Mutation {
-    createProduct(input:CreateProductInput!):Product
+  createProduct(input: CreateProductInput!): Product
 }
 
-input CreateProductInput{
-    title:String!
-    description:String
+input CreateProductInput {
+  title: String!
+  description: String
 }
 
-type Store{
-    id:ID!,
-    name:String,
-    description:String,
+type Store {
+  id: ID!
+  name: String
+  description: String
 }
 
-type Product{
-    id:ID!
-    store:Store,  
-    title:String,
-    description:String,
-    date:String,
-   
+type Product {
+  id: ID!
+  store: Store
+  title: String
+  description: String
+  date: String
+  color: [Color]
 }
 
-
-
-
-
+enum Color {
+  RED
+  GREEN
+  BLUE
+}
