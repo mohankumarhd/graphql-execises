@@ -8,5 +8,13 @@ type Customer {
   name: String!
   email: String!
   phoneNumber: String
-  policyId: String
+  policy: Policy
+}
+
+type Policy {
+  id: ID!
+  name: String
+  startDate: String
+  endDate: String
+  renewalDate: String
 }

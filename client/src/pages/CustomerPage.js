@@ -16,16 +16,19 @@ function CustomerPage() {
   return (
     <div>
       <h1 className="title is-2">Customer Details</h1>
-      <div className="box">
-        <div className="block">
-          Customer Id:{customer && customer.customerId}
+      <div className="columns">
+        <div className="column">
+          <div>Id:{customer && customer.customerId}</div>
+          <div>Name:{customer && customer.name}</div>
+          <div>Email:{customer && customer.email}</div>
+          <div>Phone Number:{customer && customer.phoneNumber}</div>
+
+          <div>Policy Id:{customer && customer.policy.id}</div>
+          <div>Name:{customer && customer.policy.name}</div>
+          <div>Start Date:{customer && customer.policy.startDate}</div>
+          <div>End Date:{customer && customer.policy.endDate}</div>
+          <div>Renewal Date:{customer && customer.policy.renewalDate}</div>
         </div>
-        <div className="block">Customer Name:{customer && customer.name}</div>
-        <div className="block">Email:{customer && customer.email}</div>
-        <div className="block">
-          Phone Number:{customer && customer.phoneNumber}
-        </div>
-        <div className="block">Policy Id{customer && customer.policyId}</div>
       </div>
     </div>
   );

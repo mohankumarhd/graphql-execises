@@ -136,7 +136,13 @@ export async function getCustomer(customerId) {
         email
         name
         phoneNumber
-        policyId
+        policy {
+          id
+          name
+          startDate
+          endDate
+          renewalDate
+        }
       }
     }
   `;
