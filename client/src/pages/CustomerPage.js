@@ -17,11 +17,15 @@ function CustomerPage() {
     <div>
       <h1 className="title is-2">Customer Details</h1>
       <div className="box">
-        <div className="block">{customer && customer.customerId}</div>
-        <div className="block">{customer && customer.name}</div>
-        <div className="block">{customer && customer.email}</div>
-        <div className="block">{customer && customer.phoneNumber}</div>
-        <div className="block">{customer && customer.policyId}</div>
+        <div className="block">
+          Customer Id:{customer && customer.customerId}
+        </div>
+        <div className="block">Customer Name:{customer && customer.name}</div>
+        <div className="block">Email:{customer && customer.email}</div>
+        <div className="block">
+          Phone Number:{customer && customer.phoneNumber}
+        </div>
+        <div className="block">Policy Id{customer && customer.policyId}</div>
       </div>
     </div>
   );

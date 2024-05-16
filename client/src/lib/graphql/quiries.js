@@ -135,6 +135,8 @@ export async function getCustomer(customerId) {
         customerId
         email
         name
+        phoneNumber
+        policyId
       }
     }
   `;

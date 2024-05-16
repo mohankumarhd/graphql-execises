@@ -12,17 +12,27 @@ function CustomerList() {
     <>
       <div>
         <h1 className="title">Customers</h1>
-        <ul className="box">
-          {customers.map((customer) => (
-            <li className="media">
-              <div className="media-content">
-                <Link to={`/customers/${customer.customerId}`}>
-                  {customer.name}
-                </Link>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th> Name</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {customers.map((customer) => (
+              <tr>
+                <td>{customer && customer.customerId}</td>
+                <td>
+                  <Link to={`/customers/${customer.customerId}`}>
+                    {customer && customer.name}
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );
