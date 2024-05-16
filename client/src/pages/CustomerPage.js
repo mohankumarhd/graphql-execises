@@ -4,30 +4,57 @@ import { useEffect, useState } from "react";
 function CustomerPage() {
   const { customerId } = useParams(null);
   getCustomer(customerId).then((res) => console.log(res));
-  const [customer, setCustomer] = useState(null);
+  const [state, setState] = useState({
+    customer: null,
+    loading: true,
+    error: false,
+  });
 
   useEffect(() => {
-    getCustomer(customerId).then((customer) => setCustomer(customer));
+    (async () => {
+      try {
+        const customer = await getCustomer(customerId);
+        setState({ customer, loading: false, error: false });
+      } catch (error) {
+        setState({ customer: null, loading: false, error: false });
+      }
+    })();
   }, [customerId]);
 
-  if (!customer) {
-    <div>Loading....</div>;
+  const { customer, loading, error } = state;
+
+  if (loading) {
+    return <div>Loading....</div>;
+  }
+
+  if (error) {
+    return <div>Error....</div>;
   }
   return (
     <div>
       <h1 className="title is-2">Customer Details</h1>
       <div className="columns">
         <div className="column">
-          <div>Id:{customer && customer.customerId}</div>
-          <div>Name:{customer && customer.name}</div>
-          <div>Email:{customer && customer.email}</div>
-          <div>Phone Number:{customer && customer.phoneNumber}</div>
+          <div>{customer.customerId && "Id : " + customer.customerId}</div>
+          <div>{customer.name && "Name : " + customer.name}</div>
+          <div>{customer.email && "Email : " + customer.email}</div>
+          <div>
+            {customer.phoneNumber && "Phone Number : " + customer.phoneNumber}
+          </div>
 
-          <div>Policy Id:{customer && customer.policy.id}</div>
-          <div>Name:{customer && customer.policy.name}</div>
-          <div>Start Date:{customer && customer.policy.startDate}</div>
-          <div>End Date:{customer && customer.policy.endDate}</div>
-          <div>Renewal Date:{customer && customer.policy.renewalDate}</div>
+          <div>{customer.policy.id && "Policy Id : " + customer.policy.id}</div>
+          <div>{customer.policy.name && "Name : " + customer.policy.name}</div>
+          <div>
+            {customer.policy.startDate &&
+              "Start Date : " + customer.policy.startDate}
+          </div>
+          <div>
+            {customer.policy.endDate && "End Date : " + customer.policy.endDate}
+          </div>
+          <div>
+            {customer.policy.renewalDate &&
+              "Renewal Date : " + customer.policy.renewalDate}
+          </div>
         </div>
       </div>
     </div>
