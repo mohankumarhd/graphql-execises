@@ -114,11 +114,12 @@ export async function getProducts() {
 
 export async function getCustomers() {
   const query = gql`
-    query Employees {
+    query Customers {
       customers {
         customerId
         email
         name
+        phoneNumber
       }
     }
   `;

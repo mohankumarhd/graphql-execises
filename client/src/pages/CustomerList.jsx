@@ -10,13 +10,16 @@ function CustomerList() {
   }, []);
   return (
     <>
-      <div>
+      <div className="container">
         <h1 className="title is-4">Customers</h1>
-        <table className="table">
+        <table className="table is-striped is-fullwidth">
           <thead>
             <tr>
               <th>Id</th>
               <th> Name</th>
+              <th> Email</th>
+              <th> Phone</th>
+              <th> Profile</th>
             </tr>
           </thead>
 
@@ -24,10 +27,12 @@ function CustomerList() {
             {customers.map((customer) => (
               <tr>
                 <td>{customer && customer.customerId}</td>
+                <td>{customer && customer.name}</td>
+                <td>{customer && customer.email}</td>
+                <td>{customer && customer.phoneNumber}</td>
                 <td>
-                  <Link to={`/customers/${customer.customerId}`}>
-                    {customer && customer.name}
-                  </Link>
+                  {" "}
+                  <Link to={`/customers/${customer.customerId}`}>Details </Link>
                 </td>
               </tr>
             ))}

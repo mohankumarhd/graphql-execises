@@ -33,6 +33,7 @@ function CustomerPage() {
   return (
     <div>
       <h4 className="title is-4 align-center">Customer Details</h4>
+      <img src="https://source.unsplash.com/random/200x200?sig=1" />
       <div class="columns is-mobile is-multiline ">
         <div class="column is-narrow">
           <p class="bd-notification is-primary">
