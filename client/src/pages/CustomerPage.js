@@ -1,6 +1,9 @@
 import { useParams } from "react-router";
 import { getCustomer } from "../lib/graphql/quiries";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 function CustomerPage() {
   const { customerId } = useParams(null);
   getCustomer(customerId).then((res) => console.log(res));
@@ -30,38 +33,87 @@ function CustomerPage() {
   if (error) {
     return <div>Error....</div>;
   }
-  return (
-    <div>
-      <h4 className="title is-4 align-center">Customer Details</h4>
-      <img src="https://source.unsplash.com/random/200x200?sig=1" />
-      <div class="columns is-mobile is-multiline ">
-        <div class="column is-narrow">
-          <p class="bd-notification is-primary">
-            <br />
-            <p>{customer.customerId && "Id : " + customer.customerId}</p>
-            <p>{customer.name && "Name : " + customer.name}</p>
-            <p></p>
-            {customer.email && "Email : " + customer.email}
-            <p>
-              {customer.phoneNumber && "Phone Number : " + customer.phoneNumber}
-            </p>
-          </p>
-        </div>
-        <div class="column is-narrow">
-          <p class="bd-notification is-primary">
-            <br />
 
-            <p>{customer.policy && "Policy Id : " + customer.policy.id}</p>
-            <p>{customer.policy && "Name : " + customer.policy.name}</p>
-            <p>
-              {customer.policy && "Start Date : " + customer.policy.startDate}
-            </p>
-            <p>{customer.policy && "End Date : " + customer.policy.endDate}</p>
-            <p>
-              {customer.policy &&
-                "Renewal Date : " + customer.policy.renewalDate}
-            </p>
-          </p>
+  const backLinkStyle = {
+    fontSize: "1.5rem",
+    textDecoration: "none",
+    transition: "color 0.3s ease",
+    color: "black",
+    cursor: "pointer",
+    opacity: "1",
+  };
+
+  const backLinkHoverStyle = {
+    opacity: "0.5",
+  };
+  return (
+    <div className="container">
+      <div className="level">
+        <div className="level-left">
+          <Link
+            to="/customers"
+            className="black-link"
+            style={backLinkStyle}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.opacity = backLinkHoverStyle.opacity)
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.opacity = backLinkStyle.opacity)
+            }
+          >
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </Link>
+          <h1 className="title is-4 ml-5">Customer Details</h1>
+        </div>
+      </div>
+      <div className="columns">
+        <div className="column is-two-thirds">
+          <div className="box">
+            <div className="content">
+              <p>
+                <strong>Id:</strong> {customer && customer.customerId}
+              </p>
+              <p>
+                <strong>Name:</strong> {customer && customer.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {customer && customer.email}
+              </p>
+              <p>
+                <strong>Phone Number:</strong>{" "}
+                {customer && customer.phoneNumber}
+              </p>
+              <p>
+                <strong>Policy Id:</strong> {customer && customer.policy.id}
+              </p>
+              <p>
+                <strong>Policy Name:</strong> {customer && customer.policy.name}
+              </p>
+              <p>
+                <strong>Start Date:</strong>{" "}
+                {customer && customer.policy.startDate}
+              </p>
+              <p>
+                <strong>End Date:</strong> {customer && customer.policy.endDate}
+              </p>
+              <p>
+                <strong>Renewal Date:</strong>{" "}
+                {customer && customer.policy.renewalDate}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="column is-one-third">
+          <div className="box has-text-centered">
+            <figure className="image is-128x128 is-inline-block">
+              <img
+                className="is-rounded"
+                src="https://source.unsplash.com/random/200x200?sig=1"
+                alt="Customer Avatar"
+              />
+            </figure>
+            <h2 className="title is-4">{customer && customer.name}</h2>
+          </div>
         </div>
       </div>
     </div>
