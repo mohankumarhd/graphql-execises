@@ -141,7 +141,7 @@ function CustomerPage() {
             <figure className="image is-128x128 is-inline-block">
               <img
                 className="is-rounded"
-                src="https://source.unsplash.com/random/200x200?sig=1"
+                src="https://i.pravatar.cc/300"
                 alt="Customer Avatar"
               />
             </figure>
