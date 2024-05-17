@@ -71,34 +71,67 @@ function CustomerPage() {
           <div className="box">
             <div className="content">
               <p>
-                <strong>Id:</strong> {customer && customer.customerId}
+                {customer && customer.customerId && <strong>Id:</strong>}{" "}
+                {customer && customer.customerId}
               </p>
               <p>
-                <strong>Name:</strong> {customer && customer.name}
+                {customer && customer.name && <strong>Name:</strong>}{" "}
+                {customer && customer.name}
               </p>
               <p>
-                <strong>Email:</strong> {customer && customer.email}
+                {customer && customer.email && <strong>Email:</strong>}{" "}
+                {customer && customer.email}
               </p>
               <p>
-                <strong>Phone Number:</strong>{" "}
+                {customer && customer.phoneNumber && (
+                  <strong>Phone Number:</strong>
+                )}{" "}
                 {customer && customer.phoneNumber}
               </p>
               <p>
-                <strong>Policy Id:</strong> {customer && customer.policy.id}
+                {customer && customer.policy && customer.policy.id && (
+                  <strong>Policy Id:</strong>
+                )}{" "}
+                {customer &&
+                  customer.policy &&
+                  customer.policy.id &&
+                  customer.policy.id}
               </p>
               <p>
-                <strong>Policy Name:</strong> {customer && customer.policy.name}
+                {customer && customer.policy && customer.policy.name && (
+                  <strong>Policy Name:</strong>
+                )}{" "}
+                {customer &&
+                  customer.policy &&
+                  customer.policy.name &&
+                  customer.policy.name}
               </p>
               <p>
-                <strong>Start Date:</strong>{" "}
-                {customer && customer.policy.startDate}
+                {customer && customer.policy && customer.policy.startDate && (
+                  <strong>Start Date:</strong>
+                )}{" "}
+                {customer &&
+                  customer.policy &&
+                  customer.policy.startDate &&
+                  customer.policy.startDate}
               </p>
               <p>
-                <strong>End Date:</strong> {customer && customer.policy.endDate}
+                {customer && customer.policy && customer.policy.endDate && (
+                  <strong>End Date:</strong>
+                )}{" "}
+                {customer &&
+                  customer.policy &&
+                  customer.policy.endDate &&
+                  customer.policy.endDate}
               </p>
               <p>
-                <strong>Renewal Date:</strong>{" "}
-                {customer && customer.policy.renewalDate}
+                {customer && customer.policy && customer.policy.renewalDate && (
+                  <strong>Renewal Date:</strong>
+                )}{" "}
+                {customer &&
+                  customer.policy &&
+                  customer.policy.renewalDate &&
+                  customer.policy.renewalDate}
               </p>
             </div>
           </div>
